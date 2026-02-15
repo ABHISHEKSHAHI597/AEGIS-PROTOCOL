@@ -1,0 +1,13 @@
+.opportunities-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+.opportunities-page h1 { margin-bottom: 0.25rem; }
+.opp-post-form { margin-bottom: 1.5rem; padding: 1.5rem; }
+.opp-post-form h3 { margin-bottom: 1rem; }
+.opp-post-form .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.opportunities-page .subtitle { color: var(--text-muted); margin-bottom: 1.5rem; }
+.opportunities-filters { margin-bottom: 1.5rem; }
+.opportunities-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem; }
+.opportunity-card { padding: 1.25rem; }
+.opportunity-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+.opp-type { font-size: 0.75rem; padding: 0.2rem 0.5rem; background: var(--primary); color: white; border-radius: 9999px; }
+.opp-meta, .opp-deadline, .opp-desc, .opp-eligibility { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem; }
+.opp-actions { display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; }

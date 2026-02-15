@@ -1,0 +1,51 @@
+.analytics-page h1 {
+  margin-bottom: 0.5rem;
+}
+
+.analytics-subtitle {
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.analytics-card {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.analytics-card h3 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+.analytics-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.analytics-card li {
+  padding: 0.35rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.priority-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.priority-dot.priority-low { background: #10b981; }
+.priority-dot.priority-medium { background: #3b82f6; }
+.priority-dot.priority-high { background: #f59e0b; }
+.priority-dot.priority-critical { background: #ef4444; }

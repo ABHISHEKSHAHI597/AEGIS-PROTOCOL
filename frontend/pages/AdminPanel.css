@@ -1,0 +1,146 @@
+.admin-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+.admin-tabs button {
+  padding: 0.5rem 1rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.admin-tabs button:hover {
+  background: var(--border);
+}
+
+.admin-tabs button.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.stats-bar {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding: 0.75rem 1rem;
+  background: var(--card-bg);
+  border-radius: 0.375rem;
+  border: 1px solid var(--border);
+}
+
+.users-table-wrap {
+  overflow-x: auto;
+  background: var(--card-bg);
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+}
+
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.users-table th,
+.users-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.users-table th {
+  font-weight: 600;
+  background: var(--bg);
+}
+
+.users-table tr:last-child td {
+  border-bottom: none;
+}
+
+.role-badge {
+  padding: 0.2rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.role-badge.admin {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.role-badge.user {
+  background: #e2e8f0;
+  color: var(--text);
+}
+
+.admin-course-assign { max-width: 400px; padding: 1.5rem; margin-top: 1rem; }
+.course-assign-form .form-group { margin-bottom: 1rem; }
+.admin-announcements { display: flex; flex-direction: column; gap: 1.5rem; }
+.admin-ann-form { max-width: 500px; padding: 1.5rem; }
+.admin-ann-form .form-group { margin-bottom: 1rem; }
+.admin-ann-form .checkbox-label { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; }
+.announcements-list-admin { display: flex; flex-direction: column; gap: 0.75rem; }
+.ann-item { padding: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+.ann-item-meta { font-size: 0.85rem; color: var(--text-muted); }
+
+.role-badge.author {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.role-badge.faculty {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.admin-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.admin-filters label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.admin-filters select {
+  padding: 0.4rem 0.6rem;
+}
+
+.admin-grievance-wrap {
+  position: relative;
+}
+
+.admin-assign {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+.admin-assign label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.admin-assign select {
+  padding: 0.35rem 0.5rem;
+}
+
+.admin-user-filters {
+  margin-bottom: 1rem;
+}
+
+.admin-user-filters select {
+  margin-left: 0.5rem;
+  padding: 0.4rem 0.6rem;
+}

@@ -1,0 +1,135 @@
+.ride-detail .back-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.ride-detail-header .ride-route-row {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.ride-detail-header .ride-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.ride-detail-header .ride-status-badge {
+  text-transform: capitalize;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.ride-detail-header .ride-status-badge.active {
+  background: rgba(40, 167, 69, 0.2);
+  color: #28a745;
+}
+
+.ride-detail-header .ride-status-badge.full {
+  background: rgba(255, 193, 7, 0.2);
+  color: #d39e00;
+}
+
+.ride-detail-header .ride-status-badge.completed {
+  background: rgba(108, 117, 125, 0.2);
+  color: #6c757d;
+}
+
+.ride-detail-header .ride-status-badge.cancelled {
+  background: rgba(220, 53, 69, 0.2);
+  color: #dc3545;
+}
+
+.ride-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.ride-requests-section h3,
+.ride-passengers h3,
+.ride-history h3 {
+  margin: 0 0 0.75rem 0;
+  font-size: 1rem;
+}
+
+.request-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.request-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+  gap: 0.5rem;
+}
+
+.request-list li div {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.ride-passengers ul,
+.ride-history ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ride-passengers li,
+.ride-history li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.35rem 0;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  padding: 1.5rem;
+  max-width: 400px;
+  width: 90%;
+}
+
+.modal-content .form-group {
+  margin-bottom: 1rem;
+}
+
+.modal-content .form-group label {
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.modal-content select,
+.modal-content textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}

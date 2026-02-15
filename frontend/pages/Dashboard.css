@@ -1,0 +1,185 @@
+.dashboard-notices { margin-bottom: 2rem; padding: 1rem; }
+.dashboard-notices h3 { font-size: 1rem; margin-bottom: 0.75rem; }
+.dashboard-notices ul { list-style: none; padding: 0; margin: 0; }
+.dashboard-notices li { padding: 0.35rem 0; display: flex; align-items: center; gap: 0.5rem; }
+.dashboard-notices .pin-badge { font-size: 0.7rem; color: var(--primary); }
+.dashboard-upcoming-events { margin-bottom: 2rem; padding: 1rem; }
+.dashboard-upcoming-events h3 { font-size: 1rem; margin-bottom: 0.75rem; }
+.dashboard-upcoming-events ul { list-style: none; padding: 0; margin: 0 0 1rem 0; }
+.dashboard-upcoming-events li { padding: 0.35rem 0; display: flex; flex-direction: column; gap: 0.15rem; }
+.dashboard-upcoming-events .event-date { font-size: 0.8rem; color: var(--text-muted); }
+.my-courses-section { margin-bottom: 2rem; }
+.courses-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; margin-top: 1rem; }
+.course-card { padding: 1rem; }
+.course-card h4 { font-size: 1rem; margin-bottom: 0.5rem; }
+.course-faculty { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+.course-progress-row { margin-bottom: 0.5rem; font-size: 0.85rem; }
+.progress-bar { height: 6px; background: var(--bg-subtle); border-radius: 9999px; margin-top: 0.25rem; overflow: hidden; }
+.progress-fill { height: 100%; background: var(--primary); transition: width 0.3s; }
+.course-marks { font-size: 0.9rem; font-weight: 600; margin-top: 0.5rem; }
+
+.dashboard-hero {
+  margin-bottom: 2rem;
+}
+
+.dashboard-hero h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
+.dashboard-subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.quick-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.quick-link-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--text);
+  transition: all var(--transition);
+}
+
+.quick-link-card:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.quick-link-icon {
+  font-size: 1.75rem;
+}
+
+.quick-link-card div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.quick-link-card strong {
+  font-size: 0.95rem;
+}
+
+.quick-link-card span:not(.quick-link-icon):not(.quick-link-arrow) {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.quick-link-arrow {
+  color: var(--primary);
+  font-size: 1.25rem;
+  opacity: 0.7;
+}
+
+.dashboard-section {
+  margin-top: 1rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.section-header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-card {
+  background: var(--card-bg);
+  padding: 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  text-align: center;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.stat-pending .stat-value { color: var(--warning); }
+.stat-progress .stat-value { color: var(--info); }
+.stat-resolved .stat-value { color: var(--success); }
+
+.grievance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.25rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  border: 2px dashed var(--border);
+}
+
+.empty-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.6;
+}
+
+.empty-state h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.error-box {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: #fef2f2;
+  color: #991b1b;
+  border-radius: var(--radius);
+  border: 1px solid #fecaca;
+}
+
+.error-icon {
+  font-size: 1.25rem;
+}
+
+@media (max-width: 640px) {
+  .stats-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

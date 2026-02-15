@@ -1,0 +1,103 @@
+.note-detail-header {
+  margin-bottom: 1.5rem;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.note-detail-header h1 {
+  font-size: 1.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.note-detail-meta {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin: 0 0 0.25rem 0;
+}
+
+.note-uploaded-by {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0 0 0.5rem 0;
+}
+
+.note-detail-stats {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.note-detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.note-detail-tags .tag {
+  font-size: 0.75rem;
+  background: var(--bg-muted);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  color: var(--text-muted);
+}
+
+.note-detail-actions {
+  margin-top: 0.75rem;
+}
+
+.note-description {
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.note-preview {
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.note-preview h3 {
+  margin: 0 0 0.75rem 0;
+  font-size: 1rem;
+}
+
+.pdf-viewer {
+  width: 100%;
+  min-height: 70vh;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #fff;
+}
+
+.note-versions {
+  padding: 1rem;
+}
+
+.note-versions h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+}
+
+.note-versions ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.note-versions li {
+  padding: 0.25rem 0;
+}

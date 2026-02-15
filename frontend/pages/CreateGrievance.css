@@ -1,0 +1,68 @@
+.create-header {
+  margin-bottom: 1.5rem;
+}
+
+.create-header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.create-header p {
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+.create-card {
+  max-width: 600px;
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.file-input {
+  padding: 0.5rem;
+}
+
+.file-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.file-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0;
+}
+
+.btn-remove {
+  background: var(--danger);
+  color: white;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0;
+}
+
+.btn-remove:hover {
+  background: #dc2626;
+}

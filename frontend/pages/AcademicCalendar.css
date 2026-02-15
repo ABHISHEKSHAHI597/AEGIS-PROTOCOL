@@ -1,0 +1,5 @@
+.academic-calendar-page h1 { margin-bottom: 0.25rem; }
+.academic-calendar-page .subtitle { color: var(--text-muted); margin-bottom: 1.5rem; }
+.calendar-viewer { width: 100%; height: calc(100vh - 200px); min-height: 600px; border: 1px solid var(--border); border-radius: 0.5rem; overflow: hidden; background: #f8fafc; }
+.pdf-iframe { width: 100%; height: 100%; border: none; }
+.calendar-fallback { margin-top: 1rem; text-align: center; }

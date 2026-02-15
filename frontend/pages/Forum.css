@@ -1,0 +1,8 @@
+.forum-page h1 { margin-bottom: 0.5rem; }
+.forum-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+.forum-thread-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.forum-thread-card { padding: 1rem; text-decoration: none; color: inherit; display: block; }
+.forum-thread-card:hover { background: var(--bg); }
+.forum-thread-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+.thread-category { font-size: 0.75rem; padding: 0.2rem 0.5rem; background: var(--bg-subtle); border-radius: 9999px; }
+.thread-meta { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; display: flex; gap: 1rem; flex-wrap: wrap; }

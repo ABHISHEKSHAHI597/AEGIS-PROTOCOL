@@ -1,0 +1,60 @@
+.facility-book .back-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.facility-book .subtitle {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.booking-form {
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.booking-form .form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.booking-form .form-group label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.9rem;
+}
+
+.booking-form input[type="date"],
+.booking-form select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.availability-heatmap {
+  padding: 1rem;
+}
+
+.availability-heatmap h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+}
+
+.slot-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.slot-list li {
+  padding: 0.25rem 0;
+}
+
+.ml-2 { margin-left: 0.5rem; }

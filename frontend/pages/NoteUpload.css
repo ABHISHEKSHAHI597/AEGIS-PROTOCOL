@@ -1,0 +1,62 @@
+.note-upload-page .subtitle {
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.note-upload-form {
+  max-width: 560px;
+  padding: 1.5rem;
+}
+
+.note-upload-form .form-group {
+  margin-bottom: 1rem;
+}
+
+.note-upload-form .form-group label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.note-upload-form .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.note-upload-form input[type="text"],
+.note-upload-form input[type="file"],
+.note-upload-form select,
+.note-upload-form textarea {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+}
+
+.note-upload-form .file-name {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.note-upload-form .form-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.alert {
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+}
+
+.alert-warning {
+  background: rgba(255, 193, 7, 0.15);
+  border: 1px solid rgba(255, 193, 7, 0.5);
+  color: var(--text);
+}

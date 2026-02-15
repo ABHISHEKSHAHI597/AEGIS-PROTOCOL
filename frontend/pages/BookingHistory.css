@@ -1,0 +1,72 @@
+.booking-history .subtitle {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.bookings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.booking-card {
+  padding: 1rem;
+}
+
+.booking-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.booking-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.booking-status-badge {
+  text-transform: capitalize;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.booking-status-badge.pending {
+  background: rgba(255, 193, 7, 0.2);
+  color: #d39e00;
+}
+
+.booking-status-badge.approved {
+  background: rgba(40, 167, 69, 0.2);
+  color: #28a745;
+}
+
+.booking-status-badge.rejected,
+.booking-status-badge.cancelled {
+  background: rgba(220, 53, 69, 0.2);
+  color: #dc3545;
+}
+
+.booking-time {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0 0 0.5rem 0;
+}
+
+.rejection-reason {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.empty-state {
+  padding: 2rem;
+  text-align: center;
+}
+
+.empty-state .btn-primary {
+  margin-top: 1rem;
+}
