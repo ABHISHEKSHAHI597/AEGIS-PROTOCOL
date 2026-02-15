@@ -17,6 +17,8 @@ import './Dashboard.css';
 const QUICK_LINKS = [
   { to: '/create', icon: '📝', label: 'New Grievance', desc: 'Submit a complaint', roles: ['user', 'author'] },
   { to: '/faculty', icon: '📋', label: 'Faculty Panel', desc: 'Manage assigned grievances', roles: ['faculty'] },
+  { to: '/admin', icon: '⚙️', label: 'Admin Panel', desc: 'Manage portal & users', roles: ['admin'] },
+  { to: '/analytics', icon: '📊', label: 'Analytics', desc: 'View reports', roles: ['admin'] },
   { to: '/notes', icon: '📚', label: 'Academic Vault', desc: 'Notes & documents' },
   { to: '/opportunities', icon: '💼', label: 'Internships & Research', desc: 'Explore opportunities' },
   { to: '/forum', icon: '💬', label: 'Campus Forum', desc: 'Discussion boards' },
@@ -29,7 +31,7 @@ const QUICK_LINKS = [
 ];
 
 export const Dashboard = () => {
-  const { user, isAdmin, isFaculty, canCreateGrievance } = useAuth();
+  const { user, isAdmin, isFaculty, isAuthority, canCreateGrievance } = useAuth();
   const visibleQuickLinks = QUICK_LINKS.filter((item) => !item.roles || item.roles.includes(user?.role));
   const [grievances, setGrievances] = useState([]);
   const [courses, setCourses] = useState([]);
@@ -96,9 +98,10 @@ export const Dashboard = () => {
         <div className="dashboard-hero">
           <h1>Welcome back, {user?.name?.split(' ')[0] || 'User'}</h1>
           <p className="dashboard-subtitle">
-            {isAdmin && 'Manage grievances and oversee the campus portal'}
+            {isAdmin && 'Manage grievances and oversee the campus portal.'}
             {isFaculty && 'View and update status of grievances assigned to you.'}
-            {!isAdmin && !isFaculty && 'Track your grievances and access campus services.'}
+            {isAuthority && 'View analytics and oversee campus services.'}
+            {!isAdmin && !isFaculty && !isAuthority && 'Track your grievances and access campus services.'}
           </p>
         </div>
 
@@ -158,17 +161,20 @@ export const Dashboard = () => {
           </section>
         )}
 
-        <div className="quick-links">
-          {visibleQuickLinks.map((item) => (
-            <Link key={item.to} to={item.to} className="quick-link-card">
-              <span className="quick-link-icon">{item.icon}</span>
-              <div>
-                <strong>{item.label}</strong>
-                <span>{item.desc}</span>
-              </div>
-              <span className="quick-link-arrow">→</span>
-            </Link>
-          ))}
+        <div className="quick-links-wrapper">
+          <h2 className="quick-links-heading">Quick access</h2>
+          <div className="quick-links quick-links-two-rows">
+            {visibleQuickLinks.map((item) => (
+              <Link key={item.to} to={item.to} className="quick-link-card">
+                <span className="quick-link-icon">{item.icon}</span>
+                <div>
+                  <strong>{item.label}</strong>
+                  <span>{item.desc}</span>
+                </div>
+                <span className="quick-link-arrow">→</span>
+              </Link>
+            ))}
+          </div>
         </div>
 
         <section className="dashboard-section">

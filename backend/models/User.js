@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ['user', 'admin', 'faculty', 'author'],
+      enum: ['user', 'admin', 'faculty', 'author', 'authority'],
       default: 'user',
     },
     /** Unique identifier for faculty role; used when assigning grievances */

@@ -1,13 +1,42 @@
 /**
  * Register Page
+ * Role: Student, Faculty, Authority, Admin. Email domain validation.
+ * Pre-fills email (and role) when redirected from login (user not found).
  */
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import './Auth.css';
 
+const REGISTER_ROLES = [
+  { value: 'user', label: 'Student' },
+  { value: 'faculty', label: 'Faculty' },
+  { value: 'authority', label: 'Authority' },
+  { value: 'author', label: 'Author (submit & view own grievances)' },
+];
+
+const STUDENTS_DOMAIN = 'students.iitmandi.ac.in';
+const INSTITUTE_DOMAIN = 'iitmandi.ac.in';
+
+const getEmailDomain = (email) => {
+  const parts = (email || '').toLowerCase().trim().split('@');
+  return parts.length === 2 ? parts[1] : '';
+};
+
+const validateEmailForRole = (email, roleValue) => {
+  const domain = getEmailDomain(email);
+  if (!email || !domain) return { valid: false, message: 'Enter a valid email.' };
+  if (roleValue === 'user') {
+    if (domain !== STUDENTS_DOMAIN) return { valid: false, message: 'Students must use @students.iitmandi.ac.in' };
+  } else {
+    if (domain !== INSTITUTE_DOMAIN) return { valid: false, message: 'Faculty, Authority and Author must use @iitmandi.ac.in' };
+  }
+  return { valid: true };
+};
+
 export const Register = () => {
+  const [searchParams] = useSearchParams();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,9 +44,22 @@ export const Register = () => {
   const [role, setRole] = useState('user');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [fromLoginRedirect, setFromLoginRedirect] = useState(false);
   const { register } = useAuth();
   const toast = useToast();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const prefillEmail = searchParams.get('email');
+    const prefillRole = searchParams.get('role');
+    if (prefillEmail) {
+      setEmail(prefillEmail);
+      setFromLoginRedirect(true);
+    }
+    if (prefillRole && ['user', 'faculty', 'authority', 'admin'].includes(prefillRole)) {
+      setRole(prefillRole === 'admin' ? 'user' : prefillRole);
+    }
+  }, [searchParams]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,6 +70,12 @@ export const Register = () => {
     }
     if (password.length < 6) {
       setError('Password must be at least 6 characters');
+      return;
+    }
+    const domainCheck = validateEmailForRole(email, role);
+    if (!domainCheck.valid) {
+      setError(domainCheck.message);
+      toast.error(domainCheck.message);
       return;
     }
     setLoading(true);
@@ -49,6 +97,9 @@ export const Register = () => {
       <div className="auth-card">
         <h1>Create account</h1>
         <p className="auth-tagline">Join the Campus Portal</p>
+        {fromLoginRedirect && (
+          <p className="auth-info-msg">No account was found for this email. Complete the form to register.</p>
+        )}
         <form onSubmit={handleSubmit}>
           {error && <div className="error-msg">{error}</div>}
           <div className="form-group">
@@ -69,15 +120,16 @@ export const Register = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              placeholder="you@example.com"
+              placeholder={role === 'user' ? 'you@students.iitmandi.ac.in' : 'you@iitmandi.ac.in'}
               autoComplete="email"
             />
           </div>
           <div className="form-group">
             <label>I am a</label>
-            <select value={role} onChange={(e) => setRole(e.target.value)}>
-              <option value="user">User (submit & view own grievances)</option>
-              <option value="author">Author (submit & view own grievances)</option>
+            <select className="auth-select" value={role} onChange={(e) => setRole(e.target.value)}>
+              {REGISTER_ROLES.map((r) => (
+                <option key={r.value} value={r.value}>{r.label}</option>
+              ))}
             </select>
           </div>
           <div className="form-group">

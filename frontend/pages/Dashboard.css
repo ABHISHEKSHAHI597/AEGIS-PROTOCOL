@@ -34,11 +34,28 @@
   font-size: 0.95rem;
 }
 
+.quick-links-wrapper {
+  margin-bottom: 2.5rem;
+}
+
+.quick-links-heading {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+/* Two rows of feature cards on desktop; wrap on smaller screens */
+.quick-links.quick-links-two-rows {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(160px, 1fr));
+  gap: 1rem;
+}
+
 .quick-links {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 1rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 0;
 }
 
 .quick-link-card {
@@ -178,8 +195,24 @@
   font-size: 1.25rem;
 }
 
+@media (max-width: 1200px) {
+  .quick-links.quick-links-two-rows {
+    grid-template-columns: repeat(4, minmax(160px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .quick-links.quick-links-two-rows {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 640px) {
   .stats-row {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .quick-links.quick-links-two-rows {
+    grid-template-columns: 1fr;
   }
 }
