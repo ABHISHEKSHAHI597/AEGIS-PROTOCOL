@@ -12,7 +12,7 @@ dotenv.config();
 const createFaculty = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    const email = process.argv[2] || 'faculty@example.com';
+    const email = process.argv[2] || 'faculty@iitmandi.ac.in';
     const password = process.argv[3] || 'faculty123';
     const name = process.argv[4] || 'Faculty User';
     const facultyId = process.argv[5] || 'F001';
@@ -47,3 +47,4 @@ const createFaculty = async () => {
 };
 
 createFaculty();
+
