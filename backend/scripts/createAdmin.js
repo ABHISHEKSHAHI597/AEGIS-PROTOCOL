@@ -12,7 +12,7 @@ dotenv.config();
 const createAdmin = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    const email = process.argv[2] || 'admin@example.com';
+    const email = process.argv[2] || 'admin@iitmandi.ac.in';
     const password = process.argv[3] || 'admin123';
     const name = process.argv[4] || 'Admin';
 
@@ -32,3 +32,4 @@ const createAdmin = async () => {
 };
 
 createAdmin();
+
