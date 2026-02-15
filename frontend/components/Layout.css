@@ -9,12 +9,15 @@
   box-shadow: var(--shadow-md);
   padding: 0.75rem 1.5rem;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.5rem;
   position: sticky;
   top: 0;
   z-index: 100;
   border-bottom: 1px solid var(--border);
+  min-width: 0;
+  overflow-x: hidden;
 }
 
 .logo {
@@ -26,6 +29,7 @@
   color: var(--primary);
   text-decoration: none !important;
   min-width: 0;
+  flex-shrink: 0;
 }
 
 .logo span:last-child {
@@ -38,10 +42,40 @@
   font-size: 1.4rem;
 }
 
+/* Two-row navbar: row 1 = logo + notif + primary links; row 2 = secondary links + user */
+.header-row {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.header-row-1 {
+  justify-content: space-between;
+}
+
+.header-row-1 .nav {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.header-row-2 {
+  justify-content: flex-start;
+}
+
+.header-row-2 .nav {
+  flex: 1 1 auto;
+  min-width: 0;
+  justify-content: flex-start;
+}
+
 .nav {
   display: flex;
   align-items: center;
   gap: 0.25rem;
+  flex-wrap: wrap;
+  min-width: 0;
 }
 
 .nav-link {
@@ -215,7 +249,7 @@
 
 .user-menu-wrap {
   position: relative;
-  margin-left: 1rem;
+  margin-left: auto;
 }
 
 .user-trigger {
@@ -365,7 +399,31 @@
     display: flex;
   }
 
-  .nav {
+  .header-row-2 {
+    display: none;
+  }
+
+  .header.header-mobile-open .header-row-2 {
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: calc(56px + 60vh);
+    background: var(--card-bg);
+    box-shadow: var(--shadow-lg);
+    z-index: 99;
+    padding: 1rem;
+    max-height: calc(100vh - 56px - 60vh);
+    overflow-y: auto;
+  }
+
+  .header.header-mobile-open .header-row-2 .nav {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .nav-row-1 {
     position: fixed;
     top: 56px;
     left: 0;
@@ -376,6 +434,8 @@
     padding: 1rem;
     box-shadow: var(--shadow-lg);
     gap: 0.25rem;
+    max-height: 60vh;
+    overflow-y: auto;
     transform: translateY(-100%);
     opacity: 0;
     pointer-events: none;
@@ -383,7 +443,7 @@
     z-index: 99;
   }
 
-  .nav.nav-open {
+  .nav-row-1.nav-open {
     transform: translateY(0);
     opacity: 1;
     pointer-events: auto;
@@ -402,7 +462,7 @@
     padding-top: 0.75rem;
   }
 
-  .user-menu-wrap {
+  .header.header-mobile-open .user-menu-wrap {
     margin-left: 0;
     margin-top: 0.5rem;
     padding-top: 0.75rem;
