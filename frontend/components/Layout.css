@@ -6,7 +6,7 @@
 
 .header {
   background: var(--card-bg);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-md);
   padding: 0.75rem 1.5rem;
   display: flex;
   align-items: center;
@@ -14,6 +14,7 @@
   position: sticky;
   top: 0;
   z-index: 100;
+  border-bottom: 1px solid var(--border);
 }
 
 .logo {
@@ -24,6 +25,13 @@
   font-size: 1.2rem;
   color: var(--primary);
   text-decoration: none !important;
+  min-width: 0;
+}
+
+.logo span:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .logo-icon {
@@ -47,6 +55,8 @@
   font-size: 0.9rem;
   text-decoration: none;
   transition: all var(--transition);
+  min-width: 0;
+  white-space: nowrap;
 }
 
 .nav-link:hover {
@@ -181,16 +191,26 @@
   opacity: 0.85;
 }
 
+.notif-item {
+  text-align: left;
+}
+
 .notif-item strong {
   display: block;
   font-size: 0.9rem;
   margin-bottom: 0.25rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
 }
 
 .notif-msg {
   font-size: 0.8rem;
   color: var(--text-muted);
   display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
 }
 
 .user-menu-wrap {
@@ -231,12 +251,17 @@
 
 .user-name {
   font-weight: 500;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .user-role {
   font-size: 0.75rem;
   color: var(--text-muted);
   text-transform: capitalize;
+  flex-shrink: 0;
 }
 
 .user-menu-backdrop {
@@ -265,6 +290,14 @@
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  min-width: 0;
+}
+
+.user-menu-header strong,
+.user-menu-header .text-small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
 }
 
 .user-menu-item {
@@ -380,4 +413,6 @@
 .main {
   flex: 1;
   padding: 1.5rem 1rem;
+  min-width: 0;
+  overflow-x: hidden;
 }

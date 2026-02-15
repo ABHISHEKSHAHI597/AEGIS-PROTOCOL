@@ -1,6 +1,6 @@
 /**
  * Dashboard Page
- * Overview with stats, quick actions, My Courses, notices, grievances
+ * Compact layout with tabs: Overview, Grievances, My Courses (when applicable)
  */
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
@@ -30,15 +30,21 @@ const QUICK_LINKS = [
   { to: '/academic-calendar', icon: '📆', label: 'Academic Calendar', desc: 'Official calendar' },
 ];
 
+const GRIEVANCES_PER_PAGE = 6;
+
 export const Dashboard = () => {
   const { user, isAdmin, isFaculty, isAuthority, canCreateGrievance } = useAuth();
   const visibleQuickLinks = QUICK_LINKS.filter((item) => !item.roles || item.roles.includes(user?.role));
+  const [activeTab, setActiveTab] = useState('overview');
   const [grievances, setGrievances] = useState([]);
   const [courses, setCourses] = useState([]);
   const [announcements, setAnnouncements] = useState([]);
   const [upcomingEvents, setUpcomingEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [grievancePage, setGrievancePage] = useState(1);
+  const [eventsOpen, setEventsOpen] = useState(true);
+  const [noticesOpen, setNoticesOpen] = useState(true);
 
   const fetchGrievances = async () => {
     try {
@@ -92,10 +98,23 @@ export const Dashboard = () => {
     inProgress: grievances.filter((g) => g.status === 'In Progress').length,
   };
 
+  const showCoursesTab = courses.length > 0 && !isAdmin && !isFaculty;
+  const tabs = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'grievances', label: 'Grievances', badge: stats.total },
+    ...(showCoursesTab ? [{ id: 'courses', label: 'My Courses' }] : []),
+  ];
+
+  const paginatedGrievances = grievances.slice(
+    (grievancePage - 1) * GRIEVANCES_PER_PAGE,
+    grievancePage * GRIEVANCES_PER_PAGE
+  );
+  const totalGrievancePages = Math.max(1, Math.ceil(grievances.length / GRIEVANCES_PER_PAGE));
+
   return (
     <Layout>
-      <div className="container">
-        <div className="dashboard-hero">
+      <div className="container dashboard-container">
+        <div className="dashboard-hero dashboard-hero-compact">
           <h1>Welcome back, {user?.name?.split(' ')[0] || 'User'}</h1>
           <p className="dashboard-subtitle">
             {isAdmin && 'Manage grievances and oversee the campus portal.'}
@@ -105,41 +124,186 @@ export const Dashboard = () => {
           </p>
         </div>
 
-        {upcomingEvents.length > 0 && (
-          <div className="dashboard-upcoming-events card">
-            <h3>📅 Upcoming Events</h3>
-            <ul>
-              {upcomingEvents.map((ev) => (
-                <li key={ev._id}>
-                  <Link to="/events">{ev.eventTitle}</Link>
-                  <span className="event-date">{new Date(ev.dateTime).toLocaleDateString()} · {ev.venue || 'TBA'}</span>
-                </li>
-              ))}
-            </ul>
-            <Link to="/events" className="btn-outline btn-sm">View all events</Link>
+        <div className="dashboard-tabs">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              type="button"
+              className={`dashboard-tab ${activeTab === tab.id ? 'active' : ''}`}
+              onClick={() => setActiveTab(tab.id)}
+            >
+              {tab.label}
+              {tab.badge != null && tab.badge > 0 && (
+                <span className="dashboard-tab-badge">{tab.badge}</span>
+              )}
+            </button>
+          ))}
+        </div>
+
+        {activeTab === 'overview' && (
+          <div className="dashboard-overview">
+            <div className="dashboard-overview-main">
+              <section className="dashboard-quick-section card">
+                <h2 className="dashboard-section-title">Quick access</h2>
+                <div className="quick-links quick-links-grid">
+                  {visibleQuickLinks.map((item) => (
+                    <Link key={item.to} to={item.to} className="quick-link-card">
+                      <span className="quick-link-icon">{item.icon}</span>
+                      <div className="quick-link-text">
+                        <strong>{item.label}</strong>
+                        <span>{item.desc}</span>
+                      </div>
+                      <span className="quick-link-arrow">→</span>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            </div>
+            <div className="dashboard-overview-side">
+              {upcomingEvents.length > 0 && (
+                <div className="dashboard-collapsible card">
+                  <button
+                    type="button"
+                    className="dashboard-collapsible-header"
+                    onClick={() => setEventsOpen(!eventsOpen)}
+                    aria-expanded={eventsOpen}
+                  >
+                    <span>📅 Upcoming Events</span>
+                    <span className="dashboard-collapsible-chevron">{eventsOpen ? '▼' : '▶'}</span>
+                  </button>
+                  {eventsOpen && (
+                    <div className="dashboard-collapsible-body">
+                      <ul>
+                        {upcomingEvents.map((ev) => (
+                          <li key={ev._id}>
+                            <Link to="/events" className="dashboard-list-link">{ev.eventTitle}</Link>
+                            <span className="event-date">{new Date(ev.dateTime).toLocaleDateString()} · {ev.venue || 'TBA'}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <Link to="/events" className="btn-outline btn-sm btn-block">View all events</Link>
+                    </div>
+                  )}
+                </div>
+              )}
+              {announcements.length > 0 && (
+                <div className="dashboard-collapsible card">
+                  <button
+                    type="button"
+                    className="dashboard-collapsible-header"
+                    onClick={() => setNoticesOpen(!noticesOpen)}
+                    aria-expanded={noticesOpen}
+                  >
+                    <span>📢 Latest Notices</span>
+                    <span className="dashboard-collapsible-chevron">{noticesOpen ? '▼' : '▶'}</span>
+                  </button>
+                  {noticesOpen && (
+                    <div className="dashboard-collapsible-body">
+                      <ul>
+                        {announcements.map((a) => (
+                          <li key={a._id}>
+                            <Link to="/announcements" className="dashboard-list-link">{a.title}</Link>
+                            {a.pinned && <span className="pin-badge">Pinned</span>}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         )}
 
-        {announcements.length > 0 && (
-          <div className="dashboard-notices card">
-            <h3>📢 Latest Notices</h3>
-            <ul>
-              {announcements.map((a) => (
-                <li key={a._id}>
-                  <Link to="/announcements">{a.title}</Link>
-                  {a.pinned && <span className="pin-badge">Pinned</span>}
-                </li>
-              ))}
-            </ul>
-          </div>
+        {activeTab === 'grievances' && (
+          <section className="dashboard-section dashboard-grievances-tab card">
+            <div className="section-header">
+              <h2>{isFaculty ? 'Assigned to you' : 'Grievances'}</h2>
+              {canCreateGrievance && (
+                <Link to="/create" className="btn-primary btn-sm">+ New</Link>
+              )}
+            </div>
+            {loading ? (
+              <PageSkeleton />
+            ) : error ? (
+              <div className="error-box">
+                <span className="error-icon">⚠</span>
+                {error}
+              </div>
+            ) : grievances.length === 0 ? (
+              <div className="empty-state">
+                <div className="empty-icon">📋</div>
+                <h3>No grievances yet</h3>
+                <p>Submit your first grievance to get started.</p>
+                {canCreateGrievance && (
+                  <Link to="/create" className="btn-primary">Create Grievance</Link>
+                )}
+              </div>
+            ) : (
+              <>
+                <div className="stats-row">
+                  <div className="stat-card">
+                    <span className="stat-value">{stats.total}</span>
+                    <span className="stat-label">Total</span>
+                  </div>
+                  <div className="stat-card stat-pending">
+                    <span className="stat-value">{stats.pending}</span>
+                    <span className="stat-label">Pending</span>
+                  </div>
+                  <div className="stat-card stat-progress">
+                    <span className="stat-value">{stats.inProgress}</span>
+                    <span className="stat-label">In Progress</span>
+                  </div>
+                  <div className="stat-card stat-resolved">
+                    <span className="stat-value">{stats.resolved}</span>
+                    <span className="stat-label">Resolved</span>
+                  </div>
+                </div>
+                <div className="grievance-grid">
+                  {paginatedGrievances.map((g) => (
+                    <GrievanceCard
+                      key={g._id}
+                      grievance={g}
+                      onUpdate={fetchGrievances}
+                      onDelete={fetchGrievances}
+                      showLink
+                    />
+                  ))}
+                </div>
+                {totalGrievancePages > 1 && (
+                  <div className="dashboard-pagination">
+                    <button
+                      type="button"
+                      className="btn-outline btn-sm"
+                      disabled={grievancePage <= 1}
+                      onClick={() => setGrievancePage((p) => p - 1)}
+                    >
+                      Previous
+                    </button>
+                    <span className="dashboard-pagination-info">
+                      Page {grievancePage} of {totalGrievancePages}
+                    </span>
+                    <button
+                      type="button"
+                      className="btn-outline btn-sm"
+                      disabled={grievancePage >= totalGrievancePages}
+                      onClick={() => setGrievancePage((p) => p + 1)}
+                    >
+                      Next
+                    </button>
+                  </div>
+                )}
+              </>
+            )}
+          </section>
         )}
 
-        {courses.length > 0 && !isAdmin && !isFaculty && (
-          <section className="dashboard-section my-courses-section">
+        {activeTab === 'courses' && showCoursesTab && (
+          <section className="dashboard-section my-courses-section card">
             <h2>My Courses</h2>
             <div className="courses-grid">
               {courses.map((c) => (
-                <div key={c._id} className="course-card card">
+                <div key={c._id} className="course-card">
                   <h4>{c.courseName}</h4>
                   {c.faculty && <p className="course-faculty">{c.faculty}</p>}
                   <div className="course-progress-row">
@@ -160,81 +324,6 @@ export const Dashboard = () => {
             </div>
           </section>
         )}
-
-        <div className="quick-links-wrapper">
-          <h2 className="quick-links-heading">Quick access</h2>
-          <div className="quick-links quick-links-two-rows">
-            {visibleQuickLinks.map((item) => (
-              <Link key={item.to} to={item.to} className="quick-link-card">
-                <span className="quick-link-icon">{item.icon}</span>
-                <div>
-                  <strong>{item.label}</strong>
-                  <span>{item.desc}</span>
-                </div>
-                <span className="quick-link-arrow">→</span>
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        <section className="dashboard-section">
-          <div className="section-header">
-            <h2>{isFaculty ? 'Assigned to you' : 'Grievances'}</h2>
-            {canCreateGrievance && (
-              <Link to="/create" className="btn-primary btn-sm">+ New</Link>
-            )}
-          </div>
-
-          {loading ? (
-            <PageSkeleton />
-          ) : error ? (
-            <div className="error-box">
-              <span className="error-icon">⚠</span>
-              {error}
-            </div>
-          ) : grievances.length === 0 ? (
-            <div className="empty-state">
-              <div className="empty-icon">📋</div>
-              <h3>No grievances yet</h3>
-              <p>Submit your first grievance to get started.</p>
-              {canCreateGrievance && (
-                <Link to="/create" className="btn-primary">Create Grievance</Link>
-              )}
-            </div>
-          ) : (
-            <>
-              <div className="stats-row">
-                <div className="stat-card">
-                  <span className="stat-value">{stats.total}</span>
-                  <span className="stat-label">Total</span>
-                </div>
-                <div className="stat-card stat-pending">
-                  <span className="stat-value">{stats.pending}</span>
-                  <span className="stat-label">Pending</span>
-                </div>
-                <div className="stat-card stat-progress">
-                  <span className="stat-value">{stats.inProgress}</span>
-                  <span className="stat-label">In Progress</span>
-                </div>
-                <div className="stat-card stat-resolved">
-                  <span className="stat-value">{stats.resolved}</span>
-                  <span className="stat-label">Resolved</span>
-                </div>
-              </div>
-              <div className="grievance-grid">
-                {grievances.map((g) => (
-                  <GrievanceCard
-                    key={g._id}
-                    grievance={g}
-                    onUpdate={fetchGrievances}
-                    onDelete={fetchGrievances}
-                    showLink
-                  />
-                ))}
-              </div>
-            </>
-          )}
-        </section>
       </div>
     </Layout>
   );

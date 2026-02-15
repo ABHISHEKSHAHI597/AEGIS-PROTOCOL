@@ -93,7 +93,7 @@ export const Layout = ({ children }) => {
       <header className="header">
         <Link to="/" className="logo" onClick={() => setMobileMenuOpen(false)}>
           <span className="logo-icon">◈</span>
-          Campus Portal
+          <span>Campus Portal</span>
         </Link>
 
         <nav className={`nav ${mobileMenuOpen ? 'nav-open' : ''}`}>

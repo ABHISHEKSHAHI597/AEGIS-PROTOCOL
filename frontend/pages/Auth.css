@@ -20,11 +20,12 @@
 .auth-card {
   position: relative;
   background: var(--card-bg);
-  padding: 2.5rem;
-  border-radius: var(--radius-lg);
+  padding: 2rem 2.25rem;
+  border-radius: var(--radius-xl);
   box-shadow: var(--shadow-xl);
   width: 100%;
   max-width: 420px;
+  overflow: hidden;
 }
 
 .auth-card h1 {
@@ -32,6 +33,8 @@
   text-align: center;
   color: var(--text);
   font-size: 1.5rem;
+  font-weight: 700;
+  word-wrap: break-word;
 }
 
 .auth-card .auth-tagline {
@@ -39,6 +42,7 @@
   color: var(--text-muted);
   font-size: 0.9rem;
   margin-bottom: 1.5rem;
+  line-height: 1.4;
 }
 
 .form-group {
@@ -50,23 +54,34 @@
   margin-bottom: 0.4rem;
   font-weight: 500;
   font-size: 0.9rem;
+  color: var(--text);
+}
+
+.form-group input,
+.form-group .auth-select {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .btn-block {
   width: 100%;
-  margin-top: 0.5rem;
-  padding: 0.7rem;
+  margin-top: 0.75rem;
+  padding: 0.75rem 1rem;
   font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--radius);
 }
 
 .error-msg {
   background: #fef2f2;
   color: #991b1b;
-  padding: 0.6rem 0.875rem;
+  padding: 0.65rem 0.875rem;
   border-radius: var(--radius);
   margin-bottom: 1rem;
   font-size: 0.9rem;
   border: 1px solid #fecaca;
+  word-wrap: break-word;
 }
 
 .auth-footer {
@@ -87,20 +102,29 @@
 
 .auth-select {
   width: 100%;
-  padding: 0.6rem 0.875rem;
+  padding: 0.65rem 0.875rem;
   font-size: 1rem;
-  border: 1px solid var(--border, #e5e7eb);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--card-bg);
   color: var(--text);
   cursor: pointer;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.auth-select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.15);
 }
 
 .auth-info-msg {
-  font-size: 0.9rem;
-  color: var(--primary);
+  font-size: 0.875rem;
+  color: var(--primary-dark);
   margin-bottom: 1rem;
-  padding: 0.5rem 0.75rem;
+  padding: 0.6rem 0.875rem;
   background: rgba(15, 118, 110, 0.1);
   border-radius: var(--radius);
+  border: 1px solid rgba(15, 118, 110, 0.2);
+  word-wrap: break-word;
 }

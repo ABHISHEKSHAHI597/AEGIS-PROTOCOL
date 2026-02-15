@@ -9,6 +9,7 @@ import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import './Auth.css';
 
+/* Student, Faculty, Authority, Admin only – no Author (Grievance); Admin logs in here, does not register */
 const LOGIN_ROLES = [
   { value: 'user', label: 'Student' },
   { value: 'faculty', label: 'Faculty' },
@@ -65,9 +66,14 @@ export const Login = () => {
       const msg = err.response?.data?.message || 'Login failed';
       const code = err.response?.data?.code;
       if (err.response?.status === 404 || code === 'USER_NOT_FOUND') {
-        const params = new URLSearchParams({ email: email.trim(), role: loginAs });
-        navigate(`/register?${params.toString()}`, { replace: true });
-        toast.info('No account found. Please complete registration.');
+        if (loginAs === 'user') {
+          const params = new URLSearchParams({ email: email.trim() });
+          navigate(`/register?${params.toString()}`, { replace: true });
+          toast.info('No account found. Please complete registration.');
+          return;
+        }
+        setError('No account found. Faculty, Authority and Admin accounts are created by the administrator.');
+        toast.error('No account found for this role.');
         return;
       }
       setError(msg);
